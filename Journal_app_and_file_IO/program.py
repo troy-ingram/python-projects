@@ -11,11 +11,11 @@ def print_header():
 
 def run_event_loop():
     print("What do you want to do with your journal?")
-    question = 'default'
+    question = 'EMPTY'
     journal_name = 'default'
     journal_data = journal.load(journal_name)
     
-    while question != 'x':
+    while question != 'x' and question:
         question = input('What do you want to do? [L]ist, [A]dd, or E[x]it? ')
         cmd = question.lower().strip()
         
@@ -23,7 +23,7 @@ def run_event_loop():
             add_entry(journal_data)
         elif cmd == 'l':
             list_entries(journal_data)
-        elif cmd != 'x':
+        elif cmd != 'x' and question:
             print("Sorry, we don't understand '{}'.".format(cmd))
     
     print('exiting...')
@@ -38,5 +38,5 @@ def add_entry(data):
     text = input('Type your entry, <enter> to exit: ')
     journal.add_entry(text, data)
 
-
-main()
+if __name__ == '__main__':
+    main()

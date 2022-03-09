@@ -1,7 +1,7 @@
 import os
 
 def load(name):
-    #todo: populate from file if it exists.
+    
     data = []
     filename = get_full_pathname(name)
     
