@@ -7,6 +7,7 @@ sg_rules = ec2.describe_security_group_rules()
 cidr_violators = []
 
 security_groups_rules = sg_rules['SecurityGroupRules']
+#iterate through security groups to see if there are any rules that are not HTTP/HTTPS using 0.0.0.0/0
 for security_group_rule in security_groups_rules:
     port_number = security_group_rule.get('FromPort', 'No Port Listed')
     cidrs = security_group_rule.get('CidrIpv4', 'No Cidr Listed')
