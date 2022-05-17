@@ -22,14 +22,16 @@ for security_group_rule in security_groups_rules:
 #if no entries in sg_dict then there are no rules in violation
 if len(sg_dict) == 0:
     print('No Security Group Violations')
+else:
+    #iterate through sg_dict and for each entry revoke ingress using the Security Group ID and the Security Group Rule ID
+    for RuleID, SGID in sg_dict.items():
+        security_group = ec2_resource.SecurityGroup(SGID)
+        security_group.revoke_ingress(
+            SecurityGroupRuleIds=[
+                RuleID,
+            ]
+        )
 
-#iterate through sg_dict and for each entry revoke ingress using the Security Group ID and the Security Group Rule ID
-for RuleID, SGID in sg_dict.items():
-    security_group = ec2_resource.SecurityGroup(SGID)
-    security_group.revoke_ingress(
-        SecurityGroupRuleIds=[
-            RuleID,
-        ]
-    )
+
 
 
